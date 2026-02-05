@@ -1,6 +1,6 @@
 Flask
 requests
-youtube_dl
+yt-dlp
 demucs
 torch
 soundfile

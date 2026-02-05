@@ -7,8 +7,9 @@ from demucs.apply import apply_model
 from demucs.pretrained import get_model as get_pretrained_model
 from demucs.audio import AudioFile
 
+
 # Download YouTube audio as WAV
-import youtube_dl
+import yt_dlp as youtube_dl
 
 def download_youtube_audio(video_id, out_path):
     url = f"https://www.youtube.com/watch?v={video_id}"

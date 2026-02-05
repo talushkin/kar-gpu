@@ -1,0 +1,7 @@
+Flask
+requests
+youtube_dl
+demucs
+torch
+soundfile
+pydub

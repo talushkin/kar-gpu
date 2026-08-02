@@ -3,9 +3,10 @@ from flask import Flask, request, send_file, jsonify
 import os
 import tempfile
 from audio_utils import download_youtube_audio, separate_audio_demucs, convert_to_mp3
-from gpu_worker import enqueue_job
+from gpu_worker import enqueue_job, start_worker
 
 app = Flask(__name__)
+start_worker()
 
 @app.route('/')
 def index():

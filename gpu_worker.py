@@ -11,6 +11,8 @@ MAX_RETRIES = 5
 
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
+WORKER_THREAD = None
+
 def exp_lin_backoff(attempt):
     return min(60, (2 ** attempt) + random.uniform(0, 2))
 
@@ -52,6 +54,15 @@ def mark_job_done(video_id, result_path):
         json.dump(jobs, f)
         f.truncate()
 
+def start_worker():
+    global WORKER_THREAD
+    if WORKER_THREAD and WORKER_THREAD.is_alive():
+        return WORKER_THREAD
+    WORKER_THREAD = threading.Thread(target=worker_loop, daemon=True, name='gpu-worker')
+    WORKER_THREAD.start()
+    return WORKER_THREAD
+
+
 def worker_loop():
     from audio_utils import download_youtube_audio, separate_audio_demucs, convert_to_mp3
     while True:
@@ -91,6 +102,4 @@ def worker_loop():
         time.sleep(1)
 
 if __name__ == '__main__':
-    t = threading.Thread(target=worker_loop)
-    t.start()
-    t.join()
+    start_worker().join()

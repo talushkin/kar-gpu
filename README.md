@@ -27,3 +27,6 @@ This Flask app runs on an AWS GPU instance. It accepts a YouTube video ID, downl
 - Demucs will use GPU if available.
 - Output files are 32kHz MP3s.
 - For production, use a WSGI server (e.g., gunicorn).
+
+## Pending queue flow
+See [PENDING_QUEUE.md](PENDING_QUEUE.md) for the polling and cleanup flow for the remote pending queue at https://d23du7ibe4a1ni.cloudfront.net/pending.json.
